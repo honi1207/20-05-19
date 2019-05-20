@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+public class ShoppingMain {
+    private static Scanner input;
+
+    public static void main(String[] args) {
+
+        input = new Scanner(System.in);
+
+        String item_1_name;
+        System.out.print("Enter name of item 1: ");
+        item_1_name = input.next();
+
+        String item_2_name;
+        System.out.print("Enter name of item 2: ");
+        item_2_name = input.next();
+
+        int item_1_price;
+        System.out.print("Enter price of item 1: ");
+        item_1_price = input.nextInt();
+
+        int item_2_price;
+        System.out.print("Enter price of item 2: ");
+        item_2_price = input.nextInt();
+
+        int item_1_quantity;
+        System.out.print("Enter quantity of item 1 :");
+        item_1_quantity = input.nextInt();
+
+        int item_2_quantity;
+        System.out.print("Enter quantity of item 2:");
+        item_2_quantity = input.nextInt();
+
+        int item_1_totalCost = item_1_price * item_1_quantity;
+        int item_2_totalCost = item_2_price * item_2_quantity;
+
+        printTotalCost(item_1_name, item_1_totalCost);
+        printTotalCost(item_2_name, item_2_totalCost);
+
+        int item_1_coupon;
+        System.out.print("Enter coupon for item 1: ");
+        item_1_coupon=input.nextInt();
+
+        int item_2_coupon;
+        System.out.print("Enter coupon for item 2: ");
+        item_2_coupon=input.nextInt();
+
+        printCouponRate(item_1_name, item_1_coupon, item_1_price);
+        printCouponRate(item_2_name, item_2_coupon, item_2_price);
+
+        double item_1_finalCost = item_1_totalCost
+                -(item_1_totalCost*item_1_coupon/100);
+        double item_2_finalCost = item_2_totalCost
+                =(item_2_totalCost*item_2_coupon/100);
+
+        int item_1_discount = ((item_1_price/item_1_coupon)/100);
+        int item_2_discount = ((item_2_price/item_2_coupon)/100);
+
+        printFinalCost(item_1_name, item_2_name, item_1_finalCost, item_2_finalCost);
+        printCostStatistics(item_1_finalCost, item_2_finalCost);
+        printCouponStatistics(item_1_discount, item_2_discount);
+
+    }
+    private static void printTotalCost(String itemName, int totalCost){
+        System.out.println("Total cost of "+itemName+" is "+totalCost);
+        }
+    private static void printCouponRate (String itemName, int itemCoupon, int itemPrice){
+        System.out.println("Total discount for "+itemName+" is "+(itemCoupon/itemPrice)*100+"%");
+        }
+    private static void printFinalCost(String item_1_name, String item_2_name, double item_1_finalCost, double item_2_finalCost){
+        System.out.println("Final cost after discount for " + item_1_name
+                + " is " + item_1_finalCost);
+        System.out.println("Final cost after discount for " + item_2_name
+                + " is " + item_2_finalCost);
+        }
+    private static void printCostStatistics(double finalCost1, double finalCost2){
+        System.out.println("****** Cost statistics ******");
+        System.out.println("Most expensive item costs : " + Math.max(finalCost1, finalCost2));
+        System.out.println("Cheapest item costs : " + Math.min(finalCost1, finalCost2));
+        }
+    private static void printCouponStatistics(int item_2_discount, int item_1_discount) {
+        System.out.println("****** Coupon statistics ******");
+        System.out.println("***Discount " + Math.min(item_1_discount, item_2_discount));
+        System.out.print(" is awesome!***");
+        }
+
+    }
+
